@@ -52,7 +52,7 @@ Once the passwordless SSH connections are set up, you can synchronize data acros
 
 1. **Run the Synchronization Script**:
    ```sh
-   ./sync_all.sh
+   cd $HOME/Qsync && ./sync_all.sh
    ```
 
 ## Repository Contents
