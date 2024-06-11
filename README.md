@@ -13,7 +13,7 @@ This repository contains scripts and instructions to set up and manage multiple 
 
 2. **Run the Setup Command**:
    ```sh
-   wget -O - https://raw.githubusercontent.com/yourusername/Qsync/main/setup.sh | bash
+   wget -O - https://raw.githubusercontent.com/evlar/Qsync/main/setup.sh | bash
    ```
 
 ### Step 2: Set Up Passwordless SSH
