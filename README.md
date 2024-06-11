@@ -26,8 +26,8 @@ Before running the synchronization script, you must set up passwordless SSH conn
    - List all your server addresses in the `nodes.txt` file in the format: `username@address`
    - Example:
      ```txt
-     user1@192.168.1.1
-     user2@192.168.1.2
+     root@192.168.1.1
+     root@192.168.1.2
      ```
 
 2. **Edit `nodes.txt` Using Nano**:
