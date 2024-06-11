@@ -27,9 +27,34 @@ else
     echo "Nano editor is already installed."
 fi
 
-# Install Git and tmux (example for Ubuntu/Debian)
-sudo apt-get update
-sudo apt-get install -y git tmux
+# Check if Git is installed
+if ! command_exists git; then
+    echo "Git not found. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y git
+else
+    echo "Git is already installed."
+fi
+
+# Check if tmux is installed
+if ! command_exists tmux; then
+    echo "tmux not found. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y tmux
+else
+    echo "tmux is already installed."
+fi
+
+# Install and configure UFW
+if ! command_exists ufw; then
+    echo "UFW not found. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y ufw
+fi
+
+echo "Configuring UFW to allow SSH connections..."
+sudo ufw allow 22/tcp
+sudo ufw enable
 
 # Clone the repository
 git clone $REPO_URL
