@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Function to check if the script is running inside a tmux session
+ensure_tmux_session() {
+    if [ -z "$TMUX" ]; then
+        echo "Not running inside a tmux session. Starting a new tmux session..."
+        tmux new-session -d -s sync_session "bash $0"
+        tmux attach-session -t sync_session
+        exit 0
+    fi
+}
+
+ensure_tmux_session
+
 ## Variables
 NODES_FILE="$HOME/Qsync/nodes.txt"
 REMOTE_DIR="~/ceremonyclient/node/.config/store"
