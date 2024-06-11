@@ -33,7 +33,7 @@ Before running the synchronization script, you must set up passwordless SSH conn
 2. **Edit `nodes.txt` Using Nano**:
    - Open the `nodes.txt` file with nano:
      ```sh
-     nano nodes.txt
+     nano $HOME/Qsync/nodes.txt
      ```
    - Use the arrow keys to navigate and edit the file.
    - To save your changes, press `Ctrl + O`, then press `Enter`.
@@ -43,7 +43,7 @@ Before running the synchronization script, you must set up passwordless SSH conn
    - This script will configure passwordless SSH for each server listed in `nodes.txt`.
    - **Run the following command**:
      ```sh
-     ./passwordless_ssh.sh
+     cd $HOME/Qsync && ./passwordless_ssh.sh
      ```
 
 ### Step 3: Synchronize Data Across Servers
