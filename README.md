@@ -3,13 +3,6 @@
 
 This repository contains scripts and instructions to set up and manage multiple VPS instances for passwordless SSH access and synchronization. Follow the steps below to ensure all servers are properly configured.
 
-## Prerequisites
-
-- `wget`
-- `ssh` client
-- `tmux`
-- `nano` (text editor)
-
 ## Installation Steps
 
 ### Step 1: Install Qsync
