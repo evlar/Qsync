@@ -14,7 +14,7 @@ ensure_tmux_session
 
 ## Variables
 NODES_FILE="$HOME/Qsync/nodes.txt"
-REMOTE_DIR="~/ceremonyclient/node/.config/store"
+REMOTE_DIR="~/ceremonyclient/node/.config"
 LOCAL_DIR_BASE="$HOME/Qsync/store_backups"
 SSH_PORT=22
 SSH_KEY="$HOME/.ssh/id_ed25519_quil"
