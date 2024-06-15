@@ -80,6 +80,7 @@ progress_bar() {
 }
 
 while true; do
+    start_time=$(date +%s)
     echo "$(date): Starting sync cycle"
 
     total_nodes=${#NODES[@]}
@@ -97,8 +98,12 @@ while true; do
 
     wait
 
+    end_time=$(date +%s)
+    duration=$((end_time - start_time))
+
     echo
     echo "$(date): All sync operations completed"
+    echo "Sync cycle took $(($duration / 60)) minutes and $(($duration % 60)) seconds."
 
     echo "Next sync in:"
     for ((i=SLEEP_INTERVAL; i>0; i--)); do
