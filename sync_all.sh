@@ -35,13 +35,15 @@ sync_node() {
     LOCAL_DIR="${LOCAL_DIR_BASE}/${LABEL}"
     mkdir -p "${LOCAL_DIR}"
 
-    ssh -i ${SSH_KEY} -p ${SSH_PORT} -o StrictHostKeyChecking=no ${ADDRESS} 'command -v rsync >/dev/null 2>&1 || { sudo apt-get update && sudo apt-get install -y rsync; }' >> $NODE_LOG_FILE 2>&1
+    ssh -i ${SSH_KEY} -p ${SSH_PORT} -o StrictHostKeyChecking=no ${ADDRESS} 'command -v rsync >/dev/null 2>&1 || { sudo apt-get update && sudo apt-get install -y rsync; }' | tee -a $NODE_LOG_FILE
 
     while [ $RETRY_COUNT -lt $RETRY_LIMIT ]; do
         echo "$(date): Starting sync for ${ADDRESS} to ${LOCAL_DIR}" | tee -a $NODE_LOG_FILE
-        ionice -c2 -n7 nice -n19 rsync -avz --partial --inplace --bwlimit=1000 -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no -p ${SSH_PORT} -vvv" ${ADDRESS}:${REMOTE_DIR} ${LOCAL_DIR}  >> $NODE_LOG_FILE 2>&1
+        ionice -c2 -n7 nice -n19 rsync -avz --partial --inplace --progress --bwlimit=1000 -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no -p ${SSH_PORT}" ${ADDRESS}:${REMOTE_DIR}/ ${LOCAL_DIR}/.config/ | tee -a $NODE_LOG_FILE
         if [ $? -eq 0 ]; then
             echo "$(date): Sync completed for ${ADDRESS}" | tee -a $NODE_LOG_FILE
+            echo "Contents of ${LOCAL_DIR}/.config/:" | tee -a $NODE_LOG_FILE
+            ls -a ${LOCAL_DIR}/.config/ | tee -a $NODE_LOG_FILE
             break
         else
             echo "$(date): Sync failed for ${ADDRESS} on attempt $((RETRY_COUNT + 1))" | tee -a $NODE_LOG_FILE
